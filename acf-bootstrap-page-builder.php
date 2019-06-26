@@ -181,7 +181,7 @@ class Acf_Bootstrap_Page_Builder {
 			if( !in_array( $hook, array( 'post.php', 'post-new.php' ) ) ) {
 				return;		
 			}			
-			wp_register_style( 'bootstrap_acf_page_builder_css', plugin_dir_url( __FILE__ ) . 'assets/css/pagebuilder.min.css', false, '1.0.0' );
+			wp_register_style( 'bootstrap_acf_page_builder_css', plugin_dir_url( __FILE__ ) . 'assets/css/pagebuilder.css', false, '1.0.0' );
 			wp_enqueue_style( 'bootstrap_acf_page_builder_css' );
 			wp_enqueue_script('bootstrap_acf_page_builderr_js', plugin_dir_url( __FILE__ ) . 'assets/js/pagebuilder.min.js');			
 		}
