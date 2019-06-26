@@ -1,0 +1,21 @@
+{
+    "name": "ACF Bootstrap Page Builder",
+    "description": "Advanced Custom Fields + Bootstrap 4 Page Builder",
+    "keywords": ["wordpress", "plugin"],
+    "version": "0.1.0",
+    "homepage": "https://github.com/murkenmedia/acf-bootstrap-page-builder",
+    "license": "GPL-2.0+",
+    "authors": [{
+        "name": "Murken Media",
+        "email": "brian@murkenmedia.com",
+        "homepage": "https://murkenmedia.com/"
+    }],
+    "type": "wordpress-plugin",
+    "config": {
+        "vendor-dir": "includes/vendor"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "composer/installers": "v1.2.0"
+    }
+}
