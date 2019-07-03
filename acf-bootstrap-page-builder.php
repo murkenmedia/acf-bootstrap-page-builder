@@ -107,6 +107,7 @@ class Acf_Bootstrap_Page_Builder {
 	public function includes() {
 		//
 		//include_once('includes/functions.php');
+		//require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
 	}
 
 	/**
@@ -125,8 +126,10 @@ class Acf_Bootstrap_Page_Builder {
 		add_action('acf/save_post', array( $this, 'clear_acfbs_transient' ), 20);
 		
 		//add_action( 'admin_menu', array( $this, 'acfbs_settings_page' ) );		
+		
+		add_filter('acf/settings/load_json', array( $this, 'acfbs_load_acf_json' ));
 
-		// add_filter( 'plugin_action_links_' . ACF_BOOTSTRAP_PAGE_BUILDER_PLUGIN_BASENAME, array( $this, 'action_links' ) );		
+		//add_filter( 'plugin_action_links_' . ACF_BOOTSTRAP_PAGE_BUILDER_PLUGIN_BASENAME, array( $this, 'action_links' ) );		
 	}
 
 	/**
@@ -157,7 +160,7 @@ class Acf_Bootstrap_Page_Builder {
 	 */
 	public function action_links( $links ) {
 
-		$links[] = sprintf( '<a href="%s" aria-label="%s">%s</a>', '#', __( 'Link Text', 'acf-bootstrap-page-builder' ), __( 'Link Text', 'acf-bootstrap-page-builder' ) );
+		$links[] = sprintf( '<a href="%s" aria-label="%s">%s</a>', 'https://github.com/murkenmedia/acf-bootstrap-page-builder', __( 'Plugin Documentation', 'acf-bootstrap-page-builder' ), __( 'Plugin Documentation', 'acf-bootstrap-page-builder' ) );
 
 		return $links;
 	}
@@ -251,6 +254,15 @@ class Acf_Bootstrap_Page_Builder {
 			delete_transient('acfbs_classes');
 		}
 	}
+	
+	public function acfbs_load_acf_json( $paths ) {
+		// remove original path (optional)
+		//unset($paths[0]);
+		$paths[] = plugin_dir_url( __FILE__ ) . 'acf-json';
+		// return
+		return $paths;
+	}
+
 	
 	
 	}

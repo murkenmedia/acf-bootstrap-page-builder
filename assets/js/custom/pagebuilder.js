@@ -97,7 +97,7 @@
 		
 		jQuery('.page_column_class').each(function() {
 			var $fieldid = jQuery(this).find('input').attr('id');
-			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link column-class" id="btn-'+$fieldid+'">Add Classes</a>');
+			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link column-class" id="btn-'+$fieldid+'">Add Classes</a><a href="#" class="d-none ml-1 btn btn-outline-primary mt-2 apply-column-class" id="apply-'+$fieldid+'">Apply</a>');
 			
 			var $colwidth = jQuery(this).find('input').val();
 			jQuery(this).closest('tr').attr('data-bsacf', $colwidth);
@@ -110,8 +110,6 @@
 	});
 	
 	jQuery( document ).ready( function() {
-		
-		//jQuery('div[data-name="section_column"]').addClass('section_column');
 		
 		addClasses();
 		$window.trigger('scroll');
@@ -142,7 +140,7 @@
 			
 			$scrollpos = $window.scrollTop();			
 			$fieldid = $linkid.split('btn-').pop();
-			jQuery('#page-builder-popup').attr('data-id', $fieldid);			
+			jQuery('#page-builder-popup').attr('data-id', $fieldid);
 			$classes = jQuery('#'+$fieldid).val();
 			loadStyles($classes);
 			
@@ -152,15 +150,20 @@
 			}).magnificPopup('open');
 		});
 		
-		
-		jQuery('.page_column_class input[type=text]').on('keydown', function(e) {
-			if (e.which == 13) {
-				e.preventDefault();
-				var $val = jQuery(this).val();		
-				jQuery(this).closest('tr').attr('data-bsacf', $val);
-			}
+		jQuery(document).on('click', 'a.apply-column-class', function(e){
+			e.preventDefault();
+			var $linkid = e.target.id;
+			$fieldid = $linkid.split('apply-').pop();			
+			var $val = jQuery('#'+$fieldid).val();		
+			jQuery(this).closest('tr').attr('data-bsacf', $val);
+			jQuery(this).addClass('d-none');
 		});
 		
+		jQuery(document).on('click', '.page_column_class input[type=text]', function(e){
+			var $linkid = e.target.id;
+			jQuery('#apply-'+$linkid).removeClass('d-none');
+		});
+
 				
 		$window.trigger('scroll');
 		//loadCustomStyles();
