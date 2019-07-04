@@ -223,15 +223,30 @@ class Acf_Bootstrap_Page_Builder {
 		
 		$class2 = '';		
 		
-		if ( false === ( $content = get_transient( 'acfbs_classes'))) {			
+		if ( false === ( $content = get_transient( 'acfbs_classes'))) {		
 		
 			if( have_rows('acfbs_classes','option') ):
+			
+				$stylenum = 0;
+				$class2 .= '<div class="row"><div class="col-12 col-sm-4">';
+			
 				while ( have_rows('acfbs_classes','option') ) : the_row();
 					$class = get_sub_field('class');
 					$label = get_sub_field('label');
-					$type = get_sub_field('type');		
+					$type = get_sub_field('type');
+			
+					if ($stylenum == 11 || $stylenum == 22) {
+						$class2 .= '</div><div class="col-12 col-sm-4">';				
+					}
+								
 					$class2 .= '<li class="show-'.$type.'"><input type="checkbox" value="'.$class.'"><label for="'.$class.'">'.$label.'</label></li>';
+			
+					$stylenum++;
+					
 				endwhile;
+			
+				$class2 .= '</div></div>';
+			
 			else: 
 				$class2 = '<li>Enter custom classes on the <a href="'.get_home_url().'/wp-admin/admin.php?page=acf-options-page-builder" target="_blank">'.get_bloginfo('name').' Settings</a> page</li>';
 			endif;
