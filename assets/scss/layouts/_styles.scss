@@ -44,29 +44,29 @@
 	
 	h3 {
 		position: relative;
-		padding-left: 40px;
+		padding-left: 32px;
 		color: #029ad1;
-		font-size: 1.3rem;
+		font-size: 1.1rem;
 		
-		&::before{
-			content:'\e900';
+		&::before {
+			content:'\e90e';
 			display:inline-block;
 			@include webfonts();
 			vertical-align:baseline;				
-			font-size: 1.6rem;
-			line-height: 1.3rem;
-			opacity:0.8;
+			font-size: 1.4rem;
+			line-height: 1.4rem;
+			//opacity:0.8;
 			
 			position: absolute;
 			left: 0;
-			top: -2px;
+			//top: -2px;
 		}
 		
 		&.acfbs-offsets::before {
 			content:'\e909';
 		}
 		
-		&.acfbs-formatting::before {
+		&.acfbs-custom::before {
 			content:'\e90a';
 		}
 		
@@ -90,6 +90,35 @@
 	}
 	
 	
+	p {
+		position: relative;
+			
+		&::before {
+			content:'\e901';
+			display:inline-block;
+			@include webfonts();
+			vertical-align:baseline;				
+			font-size: 1rem;
+			line-height: 1rem;
+			margin-right: 8px;
+
+		}
+
+		&.i-tablet::before {
+			content:'\e903';
+		}
+
+		&.i-laptop::before {
+			content:'\e902';
+		}
+
+
+		&.i-desktop::before {
+			content:'\e904';
+		}
+			
+		
+	}
 	
 	
 	&.column-styles {
