@@ -5,7 +5,6 @@
 	var $window = jQuery(window),
 		$fieldid,
 		$scrollpos,
-		//$stylepopup = jQuery('#page-builder-popup'),
 		$styletype;
 	
 	
@@ -27,9 +26,7 @@
 			} else {
 				jQuery(this).prop('checked',false);
 			}
-		});
-
-		//submitStyles();			
+		});		
 	}
 	
 	
@@ -83,7 +80,6 @@
 			jQuery(this).prop('selected',false);
 		});			
 		jQuery('#page-builder-popup-form input:checkbox').removeAttr('checked');
-		//submitStyles();
 	}
 	
 	function addClasses() {
@@ -102,12 +98,12 @@
 			var $colwidth = jQuery(this).find('input').val();
 			jQuery(this).closest('tr').attr('data-bsacf', $colwidth);
 		});
-		
 	}
 	
 	$window.load(function() {
 		$window.trigger('scroll');
 	});
+
 	
 	jQuery( document ).ready( function() {
 		
@@ -161,12 +157,16 @@
 		
 		jQuery(document).on('click', '.page_column_class input[type=text]', function(e){
 			var $linkid = e.target.id;
-			jQuery('#apply-'+$linkid).removeClass('d-none');
+			//if buttons exist
+			if(jQuery('#apply-'+$linkid).length) {
+				jQuery('#apply-'+$linkid).removeClass('d-none');
+			} else {
+				addClasses();
+				jQuery('#apply-'+$linkid).removeClass('d-none');		
+			}
 		});
-
-				
+			
 		$window.trigger('scroll');
-		//loadCustomStyles();
 
 	});	
 	
