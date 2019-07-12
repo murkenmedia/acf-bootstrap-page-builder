@@ -107,7 +107,7 @@ class Acf_Bootstrap_Page_Builder {
 	public function includes() {
 		//
 		//include_once('includes/functions.php');
-		//require_once plugin_dir_path( __FILE__ ) . 'includes/functions.php';
+		//include( plugin_dir_path( __FILE__ ) . 'includes/functions.php');
 	}
 
 	/**
@@ -128,6 +128,8 @@ class Acf_Bootstrap_Page_Builder {
 		//add_action( 'admin_menu', array( $this, 'acfbs_settings_page' ) );		
 		
 		add_filter('acf/settings/load_json', array( $this, 'acfbs_load_acf_json' ));
+		
+		add_action('acf/input/admin_footer',array( $this, 'PREFIX_apply_acf_modifications'));
 
 		//add_filter( 'plugin_action_links_' . ACF_BOOTSTRAP_PAGE_BUILDER_PLUGIN_BASENAME, array( $this, 'action_links' ) );		
 	}
@@ -220,68 +222,121 @@ class Acf_Bootstrap_Page_Builder {
 	
 	
 	public function add_class_popup($hook) {
+		
+		
+		
+		
 		$class1 = '
 		<div class="white-popup mfp-hide" id="page-builder-popup" data-id="" data-scrollpos="">
 		
-		<form name="page-builder-popup-form" id="page-builder-popup-form"><div class="container page-builder-form-container"><div class="row"><div class="col-12 col-sm-6 col-md-3 mb-4 hide-on-sections">		
+		<form name="page-builder-popup-form" id="page-builder-popup-form">
 		
-		<h3 class="acfbs-width">Column width</h3><p class="mb-0 mt-3 i-mobile">Width</p>
+		<div class="container page-builder-form-container">
 		
-		<select class="custom-select" name="size-xs"><option selected value="col-12">12/12</option><option value="col-11">11/12</option><option value="col-10">10/12</option><option value="col-9">9/12</option><option value="col-8">8/12</option><option value="col-7">7/12</option><option value="col-6">6/12</option><option value="col-5">5/12</option><option value="col-4">4/12</option><option value="col-3">3/12</option><option value="col-2">2/12</option><option value="col-1">1/12</option></select><p class="mb-0 mt-3 i-tablet">Sm Width <span class="small">(576px)</span></p>
+		<div class="row">
+			<div class="col-12">
+				<h2 class="show-section">Block Styles</h2>
+				<h2 class="show-column">Column Styles</h2>
+			</div>
+		</div>
 		
-		<select class="custom-select" name="size-sm"><option value="">-- none --</option><option value="col-sm-12">12/12</option><option value="col-sm-11">11/12</option><option value="col-sm-10">10/12</option><option value="col-sm-9">9/12</option><option value="col-sm-8">8/12</option><option value="col-sm-7">7/12</option><option value="col-sm-6">6/12</option><option value="col-sm-5">5/12</option><option value="col-sm-4">4/12</option><option value="col-sm-3">3/12</option><option value="col-sm-2">2/12</option><option value="col-sm-1">1/12</option></select><p class="mb-0 mt-3 i-laptop">Md Width <span class="small">(768px)</span></p>
+		<div class="row">
 		
-		<select class="custom-select" name="size-md"><option value="">-- none --</option><option value="col-md-12">12/12</option><option value="col-md-11">11/12</option><option value="col-md-10">10/12</option><option value="col-md-9">9/12</option><option value="col-md-8">8/12</option><option value="col-md-7">7/12</option><option value="col-md-6">6/12</option><option value="col-md-5">5/12</option><option value="col-md-4">4/12</option><option value="col-md-3">3/12</option><option value="col-md-2">2/12</option><option value="col-md-1">1/12</option></select><p class="mb-0 mt-3 i-desktop">Lg Width <span class="small">(992px)</span></p>
+			<div class="col-12 col-sm-6 col-md-3 mb-4 show-column">		
+
+				<h3 class="acfbs-width">Column width</h3><p class="mb-0 mt-3 i-mobile">Width</p>
+
+				<select class="custom-select" name="size-xs"><option selected value="col-12">12/12</option><option value="col-11">11/12</option><option value="col-10">10/12</option><option value="col-9">9/12</option><option value="col-8">8/12</option><option value="col-7">7/12</option><option value="col-6">6/12</option><option value="col-5">5/12</option><option value="col-4">4/12</option><option value="col-3">3/12</option><option value="col-2">2/12</option><option value="col-1">1/12</option></select><p class="mb-0 mt-3 i-tablet">Sm Width <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="size-sm"><option value="">-- none --</option><option value="col-sm-12">12/12</option><option value="col-sm-11">11/12</option><option value="col-sm-10">10/12</option><option value="col-sm-9">9/12</option><option value="col-sm-8">8/12</option><option value="col-sm-7">7/12</option><option value="col-sm-6">6/12</option><option value="col-sm-5">5/12</option><option value="col-sm-4">4/12</option><option value="col-sm-3">3/12</option><option value="col-sm-2">2/12</option><option value="col-sm-1">1/12</option></select><p class="mb-0 mt-3 i-laptop">Md Width <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="size-md"><option value="">-- none --</option><option value="col-md-12">12/12</option><option value="col-md-11">11/12</option><option value="col-md-10">10/12</option><option value="col-md-9">9/12</option><option value="col-md-8">8/12</option><option value="col-md-7">7/12</option><option value="col-md-6">6/12</option><option value="col-md-5">5/12</option><option value="col-md-4">4/12</option><option value="col-md-3">3/12</option><option value="col-md-2">2/12</option><option value="col-md-1">1/12</option></select><p class="mb-0 mt-3 i-desktop">Lg Width <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="size-lg"><option value="">-- none --</option><option value="col-lg-12">12/12</option><option value="col-lg-11">11/12</option><option value="col-lg-10">10/12</option><option value="col-lg-9">9/12</option><option value="col-lg-8">8/12</option><option value="col-lg-7">7/12</option><option value="col-lg-6">6/12</option><option value="col-lg-5">5/12</option><option value="col-lg-4">4/12</option><option value="col-lg-3">3/12</option><option value="col-lg-2">2/12</option><option value="col-lg-1">1/12</option></select>
+			</div>
+
+			<div class="col-12 col-sm-6 col-md-3 mb-4 show-column">
+				<h3 class="acfbs-offsets">Column Offsets</h3><p class="mb-0 mt-3 i-mobile">Offset</p>
+
+				<select class="custom-select" name="offset-xs"><option value="">-- none --</option><option value="offset-1">1</option><option value="offset-2">2</option><option value="offset-3">3</option><option value="offset-4">4</option><option value="offset-5">5</option><option value="offset-6">6</option><option value="offset-7">7</option><option value="offset-8">8</option><option value="offset-9">9</option><option value="offset-10">10</option><option value="offset-11">11</option></select><p class="mb-0 mt-3 i-tablet">Sm Offset <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="offset-sm"><option value="">-- none --</option><option value="offset-sm-1">1</option><option value="offset-sm-2">2</option><option value="offset-sm-3">3</option><option value="offset-sm-4">4</option><option value="offset-sm-5">5</option><option value="offset-sm-6">6</option><option value="offset-sm-7">7</option><option value="offset-sm-8">8</option><option value="offset-sm-9">9</option><option value="offset-sm-10">10</option><option value="offset-sm-11">11</option></select><p class="mb-0 mt-3 i-laptop">Md Offset <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="md"><option value="">-- none --</option><option value="offset-md-1">1</option><option value="offset-md-2">2</option><option value="offset-md-3">3</option><option value="offset-md-4">4</option><option value="offset-md-5">5</option><option value="offset-md-6">6</option><option value="offset-md-7">7</option><option value="offset-md-8">8</option><option value="offset-md-9">9</option><option value="offset-md-10">10</option><option value="offset-md-11">11</option></select><p class="mb-0 mt-3 i-desktop">Lg Offset <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="offset-lg"><option value="">-- none --</option><option value="offset-lg-1">1</option><option value="offset-lg-2">2</option><option value="offset-lg-3">3</option><option value="offset-lg-4">4</option><option value="offset-lg-5">5</option><option value="offset-lg-6">6</option><option value="offset-lg-7">7</option><option value="offset-lg-8">8</option><option value="offset-lg-9">9</option><option value="offset-lg-10">10</option><option value="offset-lg-11">11</option></select>
+
+			</div>			
 		
-		<select class="custom-select" name="size-lg"><option value="">-- none --</option><option value="col-lg-12">12/12</option><option value="col-lg-11">11/12</option><option value="col-lg-10">10/12</option><option value="col-lg-9">9/12</option><option value="col-lg-8">8/12</option><option value="col-lg-7">7/12</option><option value="col-lg-6">6/12</option><option value="col-lg-5">5/12</option><option value="col-lg-4">4/12</option><option value="col-lg-3">3/12</option><option value="col-lg-2">2/12</option><option value="col-lg-1">1/12</option></select></div><div class="col-12 col-sm-6 col-md-3 mb-4"><h3 class="acfbs-offsets">Column Offsets</h3><p class="mb-0 mt-3 i-mobile">Offset</p>
+			<div class="col-12 col-sm-6 col-md-6 mb-4 acfbs-custom-styles">
+				<h3 class="acfbs-custom">Custom Styles</h3>
+				<dl class="dl-horizontal mb-0 mt-3">';
+				
+			$class3 = '
+				</dl>					
+			</div>		
 		
-		<select class="custom-select" name="offset-xs"><option value="">-- none --</option><option value="offset-1">1</option><option value="offset-2">2</option><option value="offset-3">3</option><option value="offset-4">4</option><option value="offset-5">5</option><option value="offset-6">6</option><option value="offset-7">7</option><option value="offset-8">8</option><option value="offset-9">9</option><option value="offset-10">10</option><option value="offset-11">11</option></select><p class="mb-0 mt-3 i-tablet">Sm Offset <span class="small">(576px)</span></p>
+
+			<div class="col-12 col-sm-6 col-md-3 mb-4">
+				<h3 class="acfbs-top-margin">Top Margin</h3><p class="mb-0 mt-3 i-mobile">Top Marg</p>
+
+				<select class="custom-select" name="mt-xs"><option value="">-- none --</option><option value="mt-0">0</option><option value="mt-1">1</option><option value="mt-2">2</option><option value="mt-3">3</option><option value="mt-4">4</option><option value="mt-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Top Marg <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="mt-sm"><option value="">-- none --</option><option value="mt-sm-0">0</option><option value="mt-sm-1">1</option><option value="mt-sm-2">2</option><option value="mt-sm-3">3</option><option value="mt-sm-4">4</option><option value="mt-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Top Marg <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="mt-md"><option value="">-- none --</option><option value="mt-md-0">0</option><option value="mt-md-1">1</option><option value="mt-md-2">2</option><option value="mt-md-3">3</option><option value="mt-md-4">4</option><option value="mt-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Top Marg <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="mt-lg"><option value="">-- none --</option><option value="mt-lg-0">0</option><option value="mt-lg-1">1</option><option value="mt-lg-2">2</option><option value="mt-lg-3">3</option><option value="mt-lg-4">4</option><option value="mt-lg-5">5</option></select>
+
+			</div>
+
+			<div class="col-12 col-sm-6 col-md-3 mb-4">		
+
+				<h3 class="acfbs-bot-margin">Bottom Margin</h3><p class="mb-0 mt-3 i-mobile">Bot Marg</p>
+				<select class="custom-select" name="mb-xs"><option value="">-- none --</option><option value="mb-0">0</option><option value="mb-0">1</option><option value="mb-2">2</option><option value="mb-3">3</option><option value="mb-4">4</option><option value="mb-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Bot Marg <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="mb-sm"><option value="">-- none --</option><option value="mb-sm-0">0</option><option value="mb-sm-1">1</option><option value="mb-sm-2">2</option><option value="mb-sm-3">3</option><option value="mb-sm-4">4</option><option value="mb-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Bot Marg <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="mb-md"><option value="">-- none --</option><option value="mb-md-0">0</option><option value="mb-md-1">1</option><option value="mb-md-2">2</option><option value="mb-md-3">3</option><option value="mb-md-4">4</option><option value="mb-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Bot Marg <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="mb-lg"><option value="">-- none --</option><option value="mb-lg-0">0</option><option value="mb-lg-1">1</option><option value="mb-lg-2">2</option><option value="mb-lg-3">3</option><option value="mb-lg-4">4</option><option value="mb-lg-5">5</option></select></div>		
+
+			<div class="col-12 col-sm-6 col-md-3 mb-4">
+
+			<h3 class="acfbs-top-pad">Top Padding</h3><p class="mb-0 mt-3 i-mobile">Top Pad</p>
+
+				<select class="custom-select" name="pt-xs"><option value="">-- none --</option><option value="pt-0">0</option><option value="pt-1">1</option><option value="pt-2">2</option><option value="pt-3">3</option><option value="pt-4">4</option><option value="pt-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Top Pad <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="pt-sm"><option value="">-- none --</option><option value="pt-sm-0">0</option><option value="pt-sm-1">1</option><option value="pt-sm-2">2</option><option value="pt-sm-3">3</option><option value="pt-sm-4">4</option><option value="pt-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Top Pad <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="pt-md"><option value="">-- none --</option><option value="pt-md-0">0</option><option value="pt-md-1">1</option><option value="pt-md-2">2</option><option value="pt-md-3">3</option><option value="pt-md-4">4</option><option value="pt-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Top Pad <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="pt-lg"><option value="">-- none --</option><option value="pt-lg-0">0</option><option value="pt-lg-1">1</option><option value="pt-lg-2">2</option><option value="pt-lg-3">3</option><option value="pt-lg-4">4</option><option value="pt-lg-5">5</option></select>
+
+			</div>
+
+			<div class="col-12 col-sm-6 col-md-3 mb-4">
+				<h3 class="acfbs-bot-pad">Bottom Padding</h3><p class="mb-0 mt-3 i-mobile">Mobile BP</p>
+
+				<select class="custom-select" name="pb-xs"><option value="">-- none --</option><option value="pb-0">0</option><option value="pb-1">1</option><option value="pb-2">2</option><option value="pb-3">3</option><option value="pb-4">4</option><option value="pb-5">5</option></select><p class="mb-0 mt-3 i-tablet">Small BP <span class="small">(576px)</span></p>
+
+				<select class="custom-select" name="pb-sm"><option value="">-- none --</option><option value="pb-sm-0">0</option><option value="pb-sm-1">1</option><option value="pb-sm-2">2</option><option value="pb-sm-3">3</option><option value="pb-sm-4">4</option><option value="pb-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Medium BP <span class="small">(768px)</span></p>
+
+				<select class="custom-select" name="pb-md"><option value="">-- none --</option><option value="pb-md-0">0</option><option value="pb-md-1">1</option><option value="pb-md-2">2</option><option value="pb-md-3">3</option><option value="pb-md-4">4</option><option value="pb-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Large BP <span class="small">(992px)</span></p>
+
+				<select class="custom-select" name="pb-lg"><option value="">-- none --</option><option value="pb-lg-0">0</option><option value="pb-lg-1">1</option><option value="pb-lg-2">2</option><option value="pb-lg-3">3</option><option value="pb-lg-4">4</option><option value="pb-lg-5">5</option></select>
+
+			</div>	
+		</div>
 		
-		<select class="custom-select" name="offset-sm"><option value="">-- none --</option><option value="offset-sm-1">1</option><option value="offset-sm-2">2</option><option value="offset-sm-3">3</option><option value="offset-sm-4">4</option><option value="offset-sm-5">5</option><option value="offset-sm-6">6</option><option value="offset-sm-7">7</option><option value="offset-sm-8">8</option><option value="offset-sm-9">9</option><option value="offset-sm-10">10</option><option value="offset-sm-11">11</option></select><p class="mb-0 mt-3 i-laptop">Md Offset <span class="small">(768px)</span></p>
+		<div class="row mt-3">		
+			<div class="col-12">
+				<a href="#" class="btn btn-primary" id="submit-styles-btn">Apply Styles</a><a href="#" class="btn btn-outline-primary ml-3" id="reset-styles-btn">Reset</a>		
+			</div>		
+		</div>
 		
-		<select class="custom-select" name="md"><option value="">-- none --</option><option value="offset-md-1">1</option><option value="offset-md-2">2</option><option value="offset-md-3">3</option><option value="offset-md-4">4</option><option value="offset-md-5">5</option><option value="offset-md-6">6</option><option value="offset-md-7">7</option><option value="offset-md-8">8</option><option value="offset-md-9">9</option><option value="offset-md-10">10</option><option value="offset-md-11">11</option></select><p class="mb-0 mt-3 i-desktop">Lg Offset <span class="small">(992px)</span></p>
 		
-		<select class="custom-select" name="offset-lg"><option value="">-- none --</option><option value="offset-lg-1">1</option><option value="offset-lg-2">2</option><option value="offset-lg-3">3</option><option value="offset-lg-4">4</option><option value="offset-lg-5">5</option><option value="offset-lg-6">6</option><option value="offset-lg-7">7</option><option value="offset-lg-8">8</option><option value="offset-lg-9">9</option><option value="offset-lg-10">10</option><option value="offset-lg-11">11</option></select></div><div class="col-12 col-sm-6 col-md-6 mb-4"><h3 class="acfbs-custom">Custom Styles</h3><ul class="list-unstyled mb-0 mt-3">';
-		
-		
-		$class3 = '</ul></div><div class="col-12 col-sm-6 col-md-3 mb-4">
-		<h3 class="acfbs-top-margin">Top Margin</h3><p class="mb-0 mt-3 i-mobile">Top Marg</p>
-		
-		<select class="custom-select" name="mt-xs"><option value="">-- none --</option><option value="mt-0">0</option><option value="mt-1">1</option><option value="mt-2">2</option><option value="mt-3">3</option><option value="mt-4">4</option><option value="mt-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Top Marg <span class="small">(576px)</span></p>
-		
-		<select class="custom-select" name="mt-sm"><option value="">-- none --</option><option value="mt-sm-0">0</option><option value="mt-sm-1">1</option><option value="mt-sm-2">2</option><option value="mt-sm-3">3</option><option value="mt-sm-4">4</option><option value="mt-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Top Marg <span class="small">(768px)</span></p>
-		
-		<select class="custom-select" name="mt-md"><option value="">-- none --</option><option value="mt-md-0">0</option><option value="mt-md-1">1</option><option value="mt-md-2">2</option><option value="mt-md-3">3</option><option value="mt-md-4">4</option><option value="mt-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Top Marg <span class="small">(992px)</span></p>
-		
-		<select class="custom-select" name="mt-lg"><option value="">-- none --</option><option value="mt-lg-0">0</option><option value="mt-lg-1">1</option><option value="mt-lg-2">2</option><option value="mt-lg-3">3</option><option value="mt-lg-4">4</option><option value="mt-lg-5">5</option></select></div><div class="col-12 col-sm-6 col-md-3 mb-4">		
-		
-		<h3 class="acfbs-bot-margin">Bottom Margin</h3><p class="mb-0 mt-3 i-mobile">Bot Marg</p>
-		<select class="custom-select" name="mb-xs"><option value="">-- none --</option><option value="mb-0">0</option><option value="mb-0">1</option><option value="mb-2">2</option><option value="mb-3">3</option><option value="mb-4">4</option><option value="mb-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Bot Marg <span class="small">(576px)</span></p>
-		
-		<select class="custom-select" name="mb-sm"><option value="">-- none --</option><option value="mb-sm-0">0</option><option value="mb-sm-1">1</option><option value="mb-sm-2">2</option><option value="mb-sm-3">3</option><option value="mb-sm-4">4</option><option value="mb-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Bot Marg <span class="small">(768px)</span></p>
-		
-		<select class="custom-select" name="mb-md"><option value="">-- none --</option><option value="mb-md-0">0</option><option value="mb-md-1">1</option><option value="mb-md-2">2</option><option value="mb-md-3">3</option><option value="mb-md-4">4</option><option value="mb-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Bot Marg <span class="small">(992px)</span></p>
-		
-		<select class="custom-select" name="mb-lg"><option value="">-- none --</option><option value="mb-lg-0">0</option><option value="mb-lg-1">1</option><option value="mb-lg-2">2</option><option value="mb-lg-3">3</option><option value="mb-lg-4">4</option><option value="mb-lg-5">5</option></select></div>		
-		
-		<div class="col-12 col-sm-6 col-md-3 mb-4"><h3 class="acfbs-top-pad">Top Padding</h3><p class="mb-0 mt-3 i-mobile">Top Pad</p>
-		
-		<select class="custom-select" name="pt-xs"><option value="">-- none --</option><option value="pt-0">0</option><option value="pt-1">1</option><option value="pt-2">2</option><option value="pt-3">3</option><option value="pt-4">4</option><option value="pt-5">5</option></select><p class="mb-0 mt-3 i-tablet">Sm Top Pad <span class="small">(576px)</span></p>
-		
-		<select class="custom-select" name="pt-sm"><option value="">-- none --</option><option value="pt-sm-0">0</option><option value="pt-sm-1">1</option><option value="pt-sm-2">2</option><option value="pt-sm-3">3</option><option value="pt-sm-4">4</option><option value="pt-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Md Top Pad <span class="small">(768px)</span></p>
-		
-		<select class="custom-select" name="pt-md"><option value="">-- none --</option><option value="pt-md-0">0</option><option value="pt-md-1">1</option><option value="pt-md-2">2</option><option value="pt-md-3">3</option><option value="pt-md-4">4</option><option value="pt-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Lg Top Pad <span class="small">(992px)</span></p>
-		
-		<select class="custom-select" name="pt-lg"><option value="">-- none --</option><option value="pt-lg-0">0</option><option value="pt-lg-1">1</option><option value="pt-lg-2">2</option><option value="pt-lg-3">3</option><option value="pt-lg-4">4</option><option value="pt-lg-5">5</option></select></div><div class="col-12 col-sm-6 col-md-3 mb-4">
-		<h3 class="acfbs-bot-pad">Bottom Padding</h3><p class="mb-0 mt-3 i-mobile">Mobile BP</p>
-		
-		<select class="custom-select" name="pb-xs"><option value="">-- none --</option><option value="pb-0">0</option><option value="pb-1">1</option><option value="pb-2">2</option><option value="pb-3">3</option><option value="pb-4">4</option><option value="pb-5">5</option></select><p class="mb-0 mt-3 i-tablet">Small BP <span class="small">(576px)</span></p>
-		
-		<select class="custom-select" name="pb-sm"><option value="">-- none --</option><option value="pb-sm-0">0</option><option value="pb-sm-1">1</option><option value="pb-sm-2">2</option><option value="pb-sm-3">3</option><option value="pb-sm-4">4</option><option value="pb-sm-5">5</option></select><p class="mb-0 mt-3 i-laptop">Medium BP <span class="small">(768px)</span></p>
-		
-		<select class="custom-select" name="pb-md"><option value="">-- none --</option><option value="pb-md-0">0</option><option value="pb-md-1">1</option><option value="pb-md-2">2</option><option value="pb-md-3">3</option><option value="pb-md-4">4</option><option value="pb-md-5">5</option></select><p class="mb-0 mt-3 i-desktop">Large BP <span class="small">(992px)</span></p>
-		
-		<select class="custom-select" name="pb-lg"><option value="">-- none --</option><option value="pb-lg-0">0</option><option value="pb-lg-1">1</option><option value="pb-lg-2">2</option><option value="pb-lg-3">3</option><option value="pb-lg-4">4</option><option value="pb-lg-5">5</option></select></div></div><div class="row mt-3"><div class="col-12"><a href="#" class="btn btn-primary" id="submit-styles-btn">Apply Styles</a><a href="#" class="btn btn-outline-primary ml-3" id="reset-styles-btn">Reset</a></div></div></div>
+		</div>
 		
 		</form></div>';
 		
@@ -292,27 +347,27 @@ class Acf_Bootstrap_Page_Builder {
 			if( have_rows('acfbs_classes','option') ):
 			
 				$stylenum = 0;
-				$class2 .= '<div class="row"><div class="col-12 col-sm-4">';
+				//$class2 .= '<div class="row"><div class="col-12 col-sm-4">';
 			
 				while ( have_rows('acfbs_classes','option') ) : the_row();
 					$class = get_sub_field('class');
 					$label = get_sub_field('label');
 					$type = get_sub_field('type');
 			
-					if ($stylenum == 11 || $stylenum == 22) {
+					/*if ($stylenum == 11 || $stylenum == 22) {
 						$class2 .= '</div><div class="col-12 col-sm-4">';				
-					}
+					}*/
 								
-					$class2 .= '<li class="show-'.$type.'"><input type="checkbox" value="'.$class.'"><label for="'.$class.'">'.$label.'</label></li>';
+					$class2 .= '<dd class="show-'.$type.' ml-0 form-check"><input type="checkbox" value="'.$class.'" class="form-check-input"><label for="'.$class.'" class="form-check-label">'.$label.'</label></dd>';
 			
 					$stylenum++;
 					
 				endwhile;
 			
-				$class2 .= '</div></div>';
+				//$class2 .= '</div></div>';
 			
 			else: 
-				$class2 = '<li>Enter custom classes on the <a href="'.get_home_url().'/wp-admin/admin.php?page=acf-options-page-builder" target="_blank">'.get_bloginfo('name').' Settings</a> page</li>';
+				$class2 = '<dd>Enter custom classes on the <a href="'.get_home_url().'/wp-admin/admin.php?page=acf-options-page-builder" target="_blank">'.get_bloginfo('name').' Settings</a> page</dd>';
 			endif;
 
 			$content = $class1.$class2.$class3;
@@ -343,7 +398,36 @@ class Acf_Bootstrap_Page_Builder {
 		// return
 		return $paths;
 	}
-
+		
+	
+	//WYSIWYG AUTOHEIGHT
+	public function PREFIX_apply_acf_modifications($hooks) {
+	?>
+	  <style>
+		.acf-editor-wrap iframe {
+		  min-height: 0;
+		}
+	  </style>
+	  <script>
+		(function($) {
+		  // (filter called before the tinyMCE instance is created)
+		  acf.add_filter('wysiwyg_tinymce_settings', function(mceInit, id, $field) {
+			// enable autoresizing of the WYSIWYG editor
+			mceInit.wp_autoresize_on = true;
+			return mceInit;
+		  });
+		  // (action called when a WYSIWYG tinymce element has been initialized)
+		  acf.add_action('wysiwyg_tinymce_init', function(ed, id, mceInit, $field) {
+			// reduce tinymce's min-height settings
+			ed.settings.autoresize_min_height = 100;
+			// reduce iframe's 'height' style to match tinymce settings
+			$('.acf-editor-wrap iframe').css('height', '100px');
+		  });
+		})(jQuery)
+	  </script>
+	<?php
+	}
+	
 	
 	
 	}

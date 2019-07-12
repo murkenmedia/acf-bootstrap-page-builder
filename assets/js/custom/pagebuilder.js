@@ -85,7 +85,7 @@
 	function addClasses() {
 		jQuery('.page_section_class').each(function() {
 			var $fieldid = jQuery(this).find('input').attr('id');
-			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link section-class" id="btn-'+$fieldid+'">Add Classes</a>');
+			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link section-class" id="btn-'+$fieldid+'">Add Styles</a>');
 			
 			var $colwidth = jQuery(this).find('input').val();
 			jQuery(this).closest('tr').attr('data-bsacf', $colwidth);
@@ -93,7 +93,7 @@
 		
 		jQuery('.page_column_class').each(function() {
 			var $fieldid = jQuery(this).find('input').attr('id');
-			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link column-class" id="btn-'+$fieldid+'">Add Classes</a><a href="#" class="d-none ml-1 btn btn-outline-primary mt-2 apply-column-class" id="apply-'+$fieldid+'">Apply</a>');
+			jQuery(this).append('<a href="#page-builder-popup" class="btn btn-primary mt-2 open-popup-link column-class" id="btn-'+$fieldid+'">Add Styles</a><a href="#" class="d-none ml-1 btn btn-outline-primary mt-2 apply-column-class" id="apply-'+$fieldid+'">Apply</a>');
 			
 			var $colwidth = jQuery(this).find('input').val();
 			jQuery(this).closest('tr').attr('data-bsacf', $colwidth);
