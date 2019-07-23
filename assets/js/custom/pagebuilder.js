@@ -1,6 +1,5 @@
 (function(){ 
-	jQuery.noConflict();  
-		
+	jQuery.noConflict();		
 	
 	var $window = jQuery(window),
 		$fieldid,

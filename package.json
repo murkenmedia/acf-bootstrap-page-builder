@@ -9,7 +9,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "autoprefixer": "^9.6.0",
+    "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^5.0.0",
@@ -26,7 +26,7 @@
     "gulp-uglify": "^3.0.2",
     "gulp-uglifycss": "^1.0.9",
     "gulp-wp-pot": "^2.3.1",
-    "lodash": ">=4.17.11",
+    "lodash": "^4.17.15",
     "minimatch": ">=3.0.2",
     "tunnel-agent": ">=0.6.0"
   }
