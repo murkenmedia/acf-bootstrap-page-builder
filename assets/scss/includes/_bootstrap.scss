@@ -1,7 +1,7 @@
 /* bootstrap.scss */
 
-.col, [data-bsacf*="col"]{
-	position:relative;width:100%;padding-right:15px;padding-left:15px;
+[data-bsacf*="col"]{
+	
 	-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%;
 } 
 
@@ -10,8 +10,8 @@
 
 @media (min-width:576px){
 	
-	.col-sm, [data-bsacf*="col-sm"]{
-		position:relative;width:100%;padding-right:15px;padding-left:15px;
+	[data-bsacf*="col-sm"]{
+		
 		-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%;
 	} 
 
@@ -21,8 +21,8 @@
 	
 @media (min-width:768px){
 	
-	.col-md, [data-bsacf*="col-md"]{
-		position:relative;width:100%;padding-right:15px;padding-left:15px;
+	[data-bsacf*="col-md"]{
+		
 		-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%;
 	} 
 
@@ -31,8 +31,8 @@
 	
 @media (min-width:992px){
 	
-	.col-lg, [data-bsacf*="col-lg"]{
-		position:relative;width:100%;padding-right:15px;padding-left:15px;
+	[data-bsacf*="col-lg"]{
+		
 		-ms-flex-preferred-size:0;flex-basis:0;-ms-flex-positive:1;flex-grow:1;max-width:100%;
 	} 
 	
