@@ -1,9 +1,10 @@
 /*pagebuilder.scss*/
 
 #wpwrap {z-index: 20}	
-.acf-flexible-content .acf-editor-wrap iframe {min-height:none;}
+/*.acf-flexible-content .acf-editor-wrap iframe {min-height:none;}
 .acf-flexible-content .acf-field[data-name="column"] {min-height: 0 !important;}
 .acf-flexible-content .acf-field[data-name="column"] .acf-row-handle:hover .acf-icon {display: block;}
+
 .acf-flexible-content .layout .acf-fc-layout-handle {
 	background:#23282d;
 	//background:#033e4d;
@@ -25,6 +26,7 @@
 		background-color: #fafafa;
 	}	
 }
+
 .acf-field[data-name="column"] .ui-sortable{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-ms-flex-wrap:wrap;flex-wrap:wrap;}
 .acf-field[data-name="column"] .ui-sortable .acf-row {box-shadow: 0px 0px 5px rgba(0,0,0,0.2);z-index: 1;position: relative;}
 .acf-field[data-name="column"] .ui-sortable .acf-row:hover {z-index: 3;position: relative;}
@@ -32,7 +34,7 @@
 .acf-field[data-name="column"] .ui-sortable .acf-row .acf-row-handle{flex:0 0 16px;max-width:16px;}
 .acf-field[data-name="column"] tr.acf-row {
 	float: left;display: inline-block;width: 100%;
-}
+}*/
 
 /* .col-1, .acf-field[data-name="section_column"] .col-10, .acf-field[data-name="section_column"] .col-11, .acf-field[data-name="section_column"] .col-12, .acf-field[data-name="section_column"] .col-2, .acf-field[data-name="section_column"] .col-3, .acf-field[data-name="section_column"] .col-4, .acf-field[data-name="section_column"] .col-5, .acf-field[data-name="section_column"] .col-6, .acf-field[data-name="section_column"] .col-7, .acf-field[data-name="section_column"] .col-8, .acf-field[data-name="section_column"] .col-9, .acf-field[data-name="section_column"] .col-lg-1, .acf-field[data-name="section_column"] .col-lg-10, .acf-field[data-name="section_column"] .col-lg-11, .acf-field[data-name="section_column"] .col-lg-12, .acf-field[data-name="section_column"] .col-lg-2, .acf-field[data-name="section_column"] .col-lg-3, .acf-field[data-name="section_column"] .col-lg-4, .acf-field[data-name="section_column"] .col-lg-5, .acf-field[data-name="section_column"] .col-lg-6, .acf-field[data-name="section_column"] .col-lg-7, .acf-field[data-name="section_column"] .col-lg-8, .acf-field[data-name="section_column"] .col-lg-9, .acf-field[data-name="section_column"] .col-md-1, .acf-field[data-name="section_column"] .col-md-10, .acf-field[data-name="section_column"] .col-md-11, .acf-field[data-name="section_column"] .col-md-12, .acf-field[data-name="section_column"] .col-md-2, .acf-field[data-name="section_column"] .col-md-3, .acf-field[data-name="section_column"] .col-md-4, .acf-field[data-name="section_column"] .col-md-5, .acf-field[data-name="section_column"] .col-md-6, .acf-field[data-name="section_column"] .col-md-7, .acf-field[data-name="section_column"] .col-md-8, .acf-field[data-name="section_column"] .col-md-9, .acf-field[data-name="section_column"] .col-sm-1, .acf-field[data-name="section_column"] .col-sm-10, .acf-field[data-name="section_column"] .col-sm-11, .acf-field[data-name="section_column"] .col-sm-12, .acf-field[data-name="section_column"] .col-sm-2, .acf-field[data-name="section_column"] .col-sm-3, .acf-field[data-name="section_column"] .col-sm-4, .acf-field[data-name="section_column"] .col-sm-5, .acf-field[data-name="section_column"] .col-sm-6, .acf-field[data-name="section_column"] .col-sm-7, .acf-field[data-name="section_column"] .col-sm-8, .acf-field[data-name="section_column"] .col-sm-9 { float: left;display: inline-block;width: 100%;} */
 
@@ -157,6 +159,40 @@
 	}
 
 }
+
+button.open-bootstrap-popup, #submit-styles-btn, #reset-styles-btn {
+    cursor: pointer;
+}
+
+.acf-field-repeater[data-name="column"] {
+    table.acf-table tbody {
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 1;
+
+        .acf-fields {
+            width: auto;
+        }
+    }
+}
+
+.acf-row[data-bsacf] {
+    display: flex;
+
+
+    .acf-fields, .layout {
+        flex-grow: 1;
+    }
+}
+
+
+.layout[data-layout="content_block"] {
+    
+    
+    
+    
+}
+
 
 .column-styles {
 	.show-section {

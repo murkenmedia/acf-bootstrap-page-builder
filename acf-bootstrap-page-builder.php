@@ -3,7 +3,7 @@
  * Plugin Name: ACF Bootstrap Page Builder
  * Plugin URI: https://github.com/murkenmedia/acf-bootstrap-page-builder
  * Description: Advanced Custom Fields + Bootstrap 4 Page Builder
- * Version: 0.1.1
+ * Version: 0.1.0
  * Author: Murken Media
  * Author URI: https://murkenmedia.com/
  * Text Domain: acf-bootstrap-page-builder
@@ -196,9 +196,12 @@ class Acf_Bootstrap_Page_Builder {
 	}
 	
 	public function acfbs_admin_enqueue_scripts($hook) {
-		wp_register_style( 'bootstrap_acf_page_builder_css', plugin_dir_url( __FILE__ ) . 'assets/css/pagebuilder.css', array(), '1.0.0' );
+        $cssver = '1.01';
+        $jsver = '1.1';
+        
+		wp_register_style( 'bootstrap_acf_page_builder_css', plugin_dir_url( __FILE__ ) . 'assets/css/pagebuilder.css', array(), $cssver );
 		wp_enqueue_style( 'bootstrap_acf_page_builder_css' );
-		wp_register_script( 'bootstrap_acf_page_builder_js',  plugin_dir_url( __FILE__ ) . 'assets/js/pagebuilder.min.js',array( 'jquery' ), '1.0.0');
+		wp_register_script( 'bootstrap_acf_page_builder_js',  plugin_dir_url( __FILE__ ) . 'assets/js/pagebuilder.min.js',array( 'jquery' ), $jsver);
 		wp_enqueue_script( 'bootstrap_acf_page_builder_js' );
 	}
 	
@@ -224,6 +227,8 @@ class Acf_Bootstrap_Page_Builder {
 	public function add_class_popup($hook) {
 		
 		
+		
+		
 		$class1 = '
 		<div class="white-popup mfp-hide" id="page-builder-popup" data-id="" data-scrollpos="">
 		
@@ -244,13 +249,13 @@ class Acf_Bootstrap_Page_Builder {
 
 				<h3 class="acfbs-width">Column width</h3><p class="mb-0 mt-3 i-mobile">Width</p>
 
-				<select class="custom-select" name="size-xs"><option selected value="col-12">12/12</option><option value="col-11">11/12</option><option value="col-10">10/12</option><option value="col-9">9/12</option><option value="col-8">8/12</option><option value="col-7">7/12</option><option value="col-6">6/12</option><option value="col-5">5/12</option><option value="col-4">4/12</option><option value="col-3">3/12</option><option value="col-2">2/12</option><option value="col-1">1/12</option><option value="col">Flexible</option></select><p class="mb-0 mt-3 i-tablet">Sm Width <span class="small">(576px)</span></p>
+				<select class="custom-select" name="size-xs"><option selected value="col-12">12/12</option><option value="col-11">11/12</option><option value="col-10">10/12</option><option value="col-9">9/12</option><option value="col-8">8/12</option><option value="col-7">7/12</option><option value="col-6">6/12</option><option value="col-5">5/12</option><option value="col-4">4/12</option><option value="col-3">3/12</option><option value="col-2">2/12</option><option value="col-1">1/12</option></select><p class="mb-0 mt-3 i-tablet">Sm Width <span class="small">(576px)</span></p>
 
-				<select class="custom-select" name="size-sm"><option value="">-- none --</option><option value="col-sm-12">12/12</option><option value="col-sm-11">11/12</option><option value="col-sm-10">10/12</option><option value="col-sm-9">9/12</option><option value="col-sm-8">8/12</option><option value="col-sm-7">7/12</option><option value="col-sm-6">6/12</option><option value="col-sm-5">5/12</option><option value="col-sm-4">4/12</option><option value="col-sm-3">3/12</option><option value="col-sm-2">2/12</option><option value="col-sm-1">1/12</option><option value="col-sm">Flexible</option></select><p class="mb-0 mt-3 i-laptop">Md Width <span class="small">(768px)</span></p>
+				<select class="custom-select" name="size-sm"><option value="">-- none --</option><option value="col-sm-12">12/12</option><option value="col-sm-11">11/12</option><option value="col-sm-10">10/12</option><option value="col-sm-9">9/12</option><option value="col-sm-8">8/12</option><option value="col-sm-7">7/12</option><option value="col-sm-6">6/12</option><option value="col-sm-5">5/12</option><option value="col-sm-4">4/12</option><option value="col-sm-3">3/12</option><option value="col-sm-2">2/12</option><option value="col-sm-1">1/12</option></select><p class="mb-0 mt-3 i-laptop">Md Width <span class="small">(768px)</span></p>
 
-				<select class="custom-select" name="size-md"><option value="">-- none --</option><option value="col-md-12">12/12</option><option value="col-md-11">11/12</option><option value="col-md-10">10/12</option><option value="col-md-9">9/12</option><option value="col-md-8">8/12</option><option value="col-md-7">7/12</option><option value="col-md-6">6/12</option><option value="col-md-5">5/12</option><option value="col-md-4">4/12</option><option value="col-md-3">3/12</option><option value="col-md-2">2/12</option><option value="col-md-1">1/12</option><option value="col-md">Flexible</option></select><p class="mb-0 mt-3 i-desktop">Lg Width <span class="small">(992px)</span></p>
+				<select class="custom-select" name="size-md"><option value="">-- none --</option><option value="col-md-12">12/12</option><option value="col-md-11">11/12</option><option value="col-md-10">10/12</option><option value="col-md-9">9/12</option><option value="col-md-8">8/12</option><option value="col-md-7">7/12</option><option value="col-md-6">6/12</option><option value="col-md-5">5/12</option><option value="col-md-4">4/12</option><option value="col-md-3">3/12</option><option value="col-md-2">2/12</option><option value="col-md-1">1/12</option></select><p class="mb-0 mt-3 i-desktop">Lg Width <span class="small">(992px)</span></p>
 
-				<select class="custom-select" name="size-lg"><option value="">-- none --</option><option value="col-lg-12">12/12</option><option value="col-lg-11">11/12</option><option value="col-lg-10">10/12</option><option value="col-lg-9">9/12</option><option value="col-lg-8">8/12</option><option value="col-lg-7">7/12</option><option value="col-lg-6">6/12</option><option value="col-lg-5">5/12</option><option value="col-lg-4">4/12</option><option value="col-lg-3">3/12</option><option value="col-lg-2">2/12</option><option value="col-lg-1">1/12</option><option value="col-lg">Flexible</option></select>
+				<select class="custom-select" name="size-lg"><option value="">-- none --</option><option value="col-lg-12">12/12</option><option value="col-lg-11">11/12</option><option value="col-lg-10">10/12</option><option value="col-lg-9">9/12</option><option value="col-lg-8">8/12</option><option value="col-lg-7">7/12</option><option value="col-lg-6">6/12</option><option value="col-lg-5">5/12</option><option value="col-lg-4">4/12</option><option value="col-lg-3">3/12</option><option value="col-lg-2">2/12</option><option value="col-lg-1">1/12</option></select>
 			</div>
 
 			<div class="col-12 col-sm-6 col-md-3 mb-4 show-column">
@@ -329,7 +334,7 @@ class Acf_Bootstrap_Page_Builder {
 		
 		<div class="row mt-3">		
 			<div class="col-12">
-				<a href="#" class="btn btn-primary" id="submit-styles-btn">Apply Styles</a><a href="#" class="btn btn-outline-primary ml-3" id="reset-styles-btn">Reset</a>		
+				<button type="button" class="btn btn-primary" id="submit-styles-btn">Apply Styles</button><button class="btn btn-outline-primary ml-3" id="reset-styles-btn">Reset</button>		
 			</div>		
 		</div>
 		
