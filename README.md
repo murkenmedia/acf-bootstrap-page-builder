@@ -30,6 +30,13 @@ Used Components
 
 => Advanced Custom Fields Pro (v5.8.1) - https://www.advancedcustomfields.com/
 
+Installation
+===============
+* Install gulp and NPM
+* nvm use 14
+* npm install
+* gulp
+
 
 ## License
 
