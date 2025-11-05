@@ -33,7 +33,7 @@ function scssTask(){
         .pipe(postcss([ autoprefixer(), cssnano() ])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
         .pipe(dest('assets/css'))
-		.pipe(notify({ message: 'TASK:CSS Completed!'}));
+		.pipe(notify({ message: 'TASK: "CSS" Completed!'}));
 }
 
 	
