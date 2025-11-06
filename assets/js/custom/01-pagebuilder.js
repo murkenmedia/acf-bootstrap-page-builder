@@ -20,7 +20,7 @@
 		
 		jQuery('.page_column_class').each(function() {
 			var $fieldid = jQuery(this).find('input').attr('id');
-			jQuery(this).append('<button type="button" class="btn btn-primary mt-2 open-bootstrap-popup column-class" id="btn-'+$fieldid+'">Add Styles</a><a href="#" class="d-none ml-1 btn btn-outline-primary mt-2 apply-column-class" id="apply-'+$fieldid+'">Apply</button>');
+			jQuery(this).append('<button type="button" class="btn btn-primary mt-2 open-bootstrap-popup column-class" id="btn-'+$fieldid+'">Add Styles</button><button type="button" class="d-none ml-1 btn btn-outline-primary mt-2 apply-column-class" id="apply-'+$fieldid+'">Apply</button>');
 			
 			var $colwidth = jQuery(this).find('input').val();
 			jQuery(this).closest('tr').attr('data-bsacf', $colwidth);
@@ -154,7 +154,7 @@
         }).magnificPopup('open');
     });
 
-    jQuery(document).on('click', 'a.apply-column-class', function(e){
+    jQuery(document).on('click', 'button.apply-column-class', function(e){
         e.preventDefault();
         var $linkid = e.target.id;
         $fieldid = $linkid.split('apply-').pop();			
