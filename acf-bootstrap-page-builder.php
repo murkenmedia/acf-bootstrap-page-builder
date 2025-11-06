@@ -196,7 +196,7 @@ class Acf_Bootstrap_Page_Builder {
 	}
 	
 	public function acfbs_admin_enqueue_scripts($hook) {
-        $cssver = '1.01';
+        $cssver = '1.02';
         $jsver = '1.1';
         
 		wp_register_style( 'bootstrap_acf_page_builder_css', plugin_dir_url( __FILE__ ) . 'assets/css/pagebuilder.css', array(), $cssver );

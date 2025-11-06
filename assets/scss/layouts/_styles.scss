@@ -173,6 +173,13 @@ button.open-bootstrap-popup, #submit-styles-btn, #reset-styles-btn {
         .acf-fields {
             width: auto;
         }
+        
+        .acf-field-repeater .acf-repeater.-table {
+            table.acf-table tbody {
+                display: table-row-group;
+            }
+        }
+        
     }
 }
 
@@ -183,14 +190,6 @@ button.open-bootstrap-popup, #submit-styles-btn, #reset-styles-btn {
     .acf-fields, .layout {
         flex-grow: 1;
     }
-}
-
-
-.layout[data-layout="content_block"] {
-    
-    
-    
-    
 }
 
 
